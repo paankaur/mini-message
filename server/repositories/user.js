@@ -8,6 +8,10 @@ class UserRepository {
   async create(userData) {
     return User.create(userData);
   }
+
+  async findById(id) {
+    return User.findByPk(id);
+  }
 }
 
 export default new UserRepository();
