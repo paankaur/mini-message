@@ -1,10 +1,11 @@
 import React from "react";
 
-const Button = ({ children, onClick, style, type = "button" }) => {
+const Button = ({ children, onClick, style, type = "button", disabled = false }) => {
   return (
     <button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       style={{
         width: "fit-content",
         height: "fit-content",

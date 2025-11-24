@@ -2,10 +2,12 @@ import express from "express";
 import sequelize from "./util/db.js";
 import userRoutes from "./routes/user.js";
 import loadModels from "./models/index.js";
+import cors from "cors";
 
 const app = express();
 const PORT = 3000;
 
+app.use(cors());
 app.use(express.json());
 
 sequelize
