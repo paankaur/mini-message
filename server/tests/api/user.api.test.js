@@ -60,7 +60,6 @@ describe("User API tests", () => {
     expect(change.status).toBe(200);
     expect(change.body).toHaveProperty("message", "Password changed successfully");
 
-    // Verify login with new password
     const loginNew = await request(app).post("/login").send({ name: "dave", password: "newpass456" });
     expect(loginNew.status).toBe(200);
   });
