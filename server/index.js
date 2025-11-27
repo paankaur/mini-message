@@ -1,6 +1,7 @@
 import express from "express";
 import sequelize from "./util/db.js";
 import userRoutes from "./routes/user.js";
+import emailRoutes from "./routes/email.js";
 import loadModels from "./models/index.js";
 import cors from "cors";
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", userRoutes);
+app.use("/emails", emailRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
