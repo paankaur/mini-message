@@ -19,6 +19,7 @@ sequelize
   })
   .then(() => {
     console.log("Models loaded");
+    //sync() with { force: true } to reset DB : sync({ force: true })
     return sequelize.sync();
   })
   .catch((error) => console.log("Unable to connect to DB", error));

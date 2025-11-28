@@ -27,7 +27,7 @@ const loadModels = async () => {
         const modelFile = module.default;
 
         if (modelFile && typeof modelFile.getTableName === "function") {
-          models[modelFile.getTableName()] = modelFile;
+          models[modelFile.name] = modelFile;
         }
       }
     }
