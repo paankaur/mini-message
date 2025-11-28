@@ -1,0 +1,52 @@
+import sequelize from "../util/db.js";
+import Sequelize from "sequelize";
+import bcrypt from "bcrypt";
+
+const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: Sequelize.DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
+    name: {
+      type: Sequelize.DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: Sequelize.DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    hooks: {
+      beforeCreate: async (user) => {
+        const saltRounds = 12;
+        const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+        user.password = hashedPassword;
+      },
+      beforeUpdate: async (user) => {
+        if (user.changed("password")) {
+          const saltRounds = 12;
+          const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+          user.password = hashedPassword;
+        }
+      },
+    },
+  }
+);
+
+User.prototype.isValidPassword = function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
+User.associate = (models) => {
+    if (models.Email) {
+        User.hasMany(models.Email, { foreignKey: 'senderId', as: 'sentEmails' });
+        User.hasMany(models.Email, { foreignKey: 'receiverId', as: 'receivedEmails' });
+    }
+};
+
+export default User;
