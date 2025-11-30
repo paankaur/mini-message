@@ -34,10 +34,14 @@ class UserService {
     if (!user) {
       throw new Error("User not found.");
     }
-    const isOldPasswordValid = await user.isValidPassword(oldPassword);
-    if (!isOldPasswordValid) {
-      throw new Error("Old password is incorrect.");
+    
+    if (oldPassword) {
+      const isOldPasswordValid = await user.isValidPassword(oldPassword);
+      if (!isOldPasswordValid) {
+        throw new Error("Old password is incorrect.");
+      }
     }
+
     if (!newPassword || newPassword.length < 6) {
       throw new Error("New password must be at least 6 characters long.");
     }

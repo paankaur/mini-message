@@ -32,8 +32,12 @@ const Login = ({ setUser }) => {
       const data = await response.json();
 
       if (response.ok) {
+        // server returns { message, user: { id, name } }
+        const serverUser = data.user || {};
         const userData = {
-          username: data.username || username,
+          id: serverUser.id,
+          name: serverUser.name || username,
+          username: serverUser.name || username,
           token: data.token || "mock_auth_token",
         };
         setUser(userData);

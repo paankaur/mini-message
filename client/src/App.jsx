@@ -1,12 +1,10 @@
 import "./App.css";
-import SendMessage from "./components/SendMessage.jsx";
-import InputField from "./components/InputField.jsx";
-import Button from "./components/Button.jsx";
 import { useState, useEffect } from "react";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import { Routes, Route } from "react-router-dom";
 import UserScreen from "./pages/UserScreen.jsx";
+import Settings from "./pages/Settings.jsx";
 import { useNavigate } from "react-router-dom";
 function App() {
   const navigate = useNavigate();
@@ -47,6 +45,7 @@ function App() {
         <Route path="/" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/main" element={<UserScreen user={user} handleLogout={handleLogout} />} />
+        <Route path="/settings" element={<Settings user={user} />} />
       </Routes>
     </div>
   );

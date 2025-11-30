@@ -158,7 +158,7 @@ describe("UserController Tests", () => {
       UserService.changePassword.mockRejectedValue(new Error(errorMessage));
       await UserController.changePassword(req, res);
 
-      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.status).toHaveBeenCalledWith(400);
       expect(res.json).toHaveBeenCalledWith({
         message: errorMessage,
       });
@@ -172,8 +172,7 @@ describe("UserController Tests", () => {
 
       expect(res.status).toHaveBeenCalledWith(400);
       expect(res.json).toHaveBeenCalledWith({
-        message: "Password change failed",
-        error: internalError.message,
+        message: internalError.message,
       });
     });
   });

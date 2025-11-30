@@ -69,7 +69,8 @@ describe("User API tests", () => {
     const userId = reg.body.user.id;
 
     const wrongOld = await request(app).put("/change-password").send({ userId, oldPassword: "badold", newPassword: "newpass" });
-    expect(wrongOld.status).toBe(404);
+
+    expect(wrongOld.status).toBe(400);
 
     const missing = await request(app).put("/change-password").send({ userId: 99999, oldPassword: "whatever", newPassword: "newpass" });
     expect(missing.status).toBe(404);

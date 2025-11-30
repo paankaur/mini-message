@@ -38,10 +38,10 @@ class UserController {
       await UserService.changePassword(userId, oldPassword, newPassword);
       res.status(200).json({ message: "Password changed successfully" });
     } catch (error) {
-      if (error.message === "User not found." || error.message === "Old password is incorrect.") {
+      if (error.message === "User not found.") {
         return res.status(404).json({ message: error.message });
       }
-      res.status(400).json({ message: "Password change failed", error: error.message });
+      res.status(400).json({ message: error.message || "Password change failed" });
     }
   }
 }
