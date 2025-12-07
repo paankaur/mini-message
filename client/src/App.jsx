@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import CreateMessage from "./pages/CreateMessage.jsx";
+import ReadMessage from "./pages/ReadMessage.jsx";
 import { Routes, Route } from "react-router-dom";
 import UserScreen from "./pages/UserScreen.jsx";
 import Settings from "./pages/Settings.jsx";
@@ -52,6 +53,7 @@ function App() {
         <Route path="/main" element={<UserScreen user={user} handleLogout={handleLogout} />} />
         <Route path="/settings" element={<Settings user={user} />} />
         <Route path="/create-message" element={<CreateMessage user={user} />} />
+        <Route path="/read-message" element={<ReadMessage user={user} />} />
       </Routes>
     </div>
   );

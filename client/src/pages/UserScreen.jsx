@@ -36,7 +36,7 @@ const UserScreen = ({ user, handleLogout }) => {
             </Button>
             <Button
               style={{ height: "600px", width: "180px" }}
-              onClick={() => navigate("/create-message")}
+              onClick={() => navigate("/read-message")}
             >
               Loe
             </Button>

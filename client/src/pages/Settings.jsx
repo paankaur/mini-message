@@ -64,7 +64,7 @@ const Settings = ({ user }) => {
     <div>
       {user ? (
         <>
-          <div>
+          <div style={{ marginRight: "auto", width: "fit-content" }}>
             <Icon type="back" onClick={() => navigate("/main")} />
           </div>
 
