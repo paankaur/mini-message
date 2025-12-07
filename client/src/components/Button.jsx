@@ -10,7 +10,7 @@ const Button = ({ children, onClick, style, type = "button", disabled = false })
         width: "fit-content",
         height: "fit-content",
         borderRadius: "8px",
-        border: "1px solid transparent",
+        // border võtab index.css hover effecti maha
         padding: "0.6em 1.2em",
         fontSize: "1em",
         fontWeight: 500,

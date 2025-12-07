@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
+import Icon from "../components/Icon.jsx";
 import { useNavigate } from "react-router-dom";
 
 const API_URL = "http://localhost:3000";
@@ -72,6 +73,8 @@ const Register = () => {
   };
 
   return (
+    <>
+    <Icon type="back" onClick={() => navigate("/")} />
     <form onSubmit={handleRegisterSubmit}>
       <InputField
         label="Kasutajanimi"
@@ -101,6 +104,7 @@ const Register = () => {
         Registreeru
       </Button>
     </form>
+    </>
   );
 };
 

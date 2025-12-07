@@ -44,6 +44,19 @@ class UserController {
       res.status(400).json({ message: error.message || "Password change failed" });
     }
   }
+
+  async getUserByName(req, res) {
+    try {
+      const { name } = req.params;
+      const user = await UserService.getUserByName(name);
+      if (!user) {
+        return res.status(404).json({ message: "User not found." });
+      }
+      res.status(200).json({ user: { id: user.id, name: user.name } });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to get user", error: error.message });
+    }
+  }
 }
 
 export default new UserController();

@@ -49,6 +49,10 @@ class UserService {
     return user.save();
   }
 
+  async getUserByName(name) {
+    return UserRepository.findByName(name);
+  }
+
 }
 
 export default new UserService();

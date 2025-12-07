@@ -2,6 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import CreateMessage from "./pages/CreateMessage.jsx";
 import { Routes, Route } from "react-router-dom";
 import UserScreen from "./pages/UserScreen.jsx";
 import Settings from "./pages/Settings.jsx";
@@ -35,6 +36,10 @@ function App() {
   return (
     <div
       style={{
+        border: "1px solid grey",
+        borderRadius: "10px",
+        padding: "20px",
+        margin: "20px auto",
         display: "flex",
         flexDirection: "column",
         gap: "10px",
@@ -46,6 +51,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/main" element={<UserScreen user={user} handleLogout={handleLogout} />} />
         <Route path="/settings" element={<Settings user={user} />} />
+        <Route path="/create-message" element={<CreateMessage user={user} />} />
       </Routes>
     </div>
   );
