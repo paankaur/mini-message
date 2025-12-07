@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "../components/Button.jsx";
 import Icon from "../components/Icon.jsx";
@@ -6,6 +6,29 @@ import { useNavigate } from "react-router-dom";
 
 const UserScreen = ({ user, handleLogout }) => {
   const navigate = useNavigate();
+  const [hasUnreadMessages, setHasUnreadMessages] = useState(false);
+
+  useEffect(() => {
+    if (!user || !user.id) {
+      setHasUnreadMessages(false);
+      return;
+    }
+
+    const checkUnreadMessages = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/emails/inbox/${user.id}`);
+        if (response.ok) {
+          const data = await response.json();
+          const hasUnread = data.emails && data.emails.some(email => email.unread === true);
+          setHasUnreadMessages(hasUnread);
+        }
+      } catch (error) {
+        console.error("Error checking unread messages:", error);
+      }
+    };
+
+    checkUnreadMessages();
+  }, [user]);
 
   return (
     <div>
@@ -35,7 +58,11 @@ const UserScreen = ({ user, handleLogout }) => {
               Kirjuta
             </Button>
             <Button
-              style={{ height: "600px", width: "180px" }}
+              style={{ 
+                height: "600px", 
+                width: "180px",
+                ...(hasUnreadMessages && { border: "2px solid #10b918ff" })
+              }}
               onClick={() => navigate("/read-message")}
             >
               Loe
