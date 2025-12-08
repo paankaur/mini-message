@@ -5,8 +5,9 @@ import Button from "../components/Button";
 import Icon from "../components/Icon.jsx";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:3000/emails/";
-const USER_API_URL = "http://localhost:3000/user/";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_URL = `${API_BASE.replace(/\/$/, "")}/emails/`;
+const USER_API_URL = `${API_BASE.replace(/\/$/, "")}/user/`;
 
 const CreateMessage = ({ user }) => {
   const navigate = useNavigate();

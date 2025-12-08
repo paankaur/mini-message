@@ -6,8 +6,9 @@ import { BiSolidMessageError } from "react-icons/bi";
 import Icon from "../components/Icon.jsx";
 import { useNavigate } from "react-router-dom";
 
-const API_INBOX_URL = "http://localhost:3000/emails/inbox/";
-const API_BASE_URL = "http://localhost:3000/emails/";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_INBOX_URL = `${API_BASE.replace(/\/$/, "")}/emails/inbox/`;
+const API_BASE_URL = `${API_BASE.replace(/\/$/, "")}/emails/`;
 
 const ReadMessage = ({ user }) => {
   const navigate = useNavigate();

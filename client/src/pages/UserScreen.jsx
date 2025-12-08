@@ -11,7 +11,8 @@ const UserScreen = ({ user, handleLogout }) => {
 
   useEffect(() => {
     if (!user) return;
-    const socket = connectSocket("http://localhost:3000", user.id);
+    const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_API_URL || window.location.origin;
+    const socket = connectSocket(SOCKET_URL, user.id);
     const handler = (payload) => {
       setNotifications((n) => [payload, ...n]);
     };
@@ -33,9 +34,9 @@ const UserScreen = ({ user, handleLogout }) => {
 
     const checkUnreadMessages = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3000/emails/inbox/${user.id}`
-        );
+        const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+        const inboxUrl = `${API_BASE.replace(/\/$/, "")}/emails/inbox/${user.id}`;
+        const response = await fetch(inboxUrl);
         if (response.ok) {
           const data = await response.json();
           const unreadEmails = data.emails
@@ -58,19 +59,12 @@ const UserScreen = ({ user, handleLogout }) => {
         // Authenticated View (UserScreen Logic)
 
         <>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Icon type="back" onClick={() => navigate("/")} />
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          
             <Icon type="settings" onClick={() => navigate("/settings")} />
           </div>
 
-          <h2>Tere, {user.username}!</h2>
-          <Icon type="settings" onClick={() => navigate("/settings")} />
           <h2>Tere, {user.name ?? user.username}!</h2>
-          {notifications.length > 0 && (
-            <div style={{ background: "#fde68a", padding: "6px", borderRadius: "4px" }}>
-              <strong>{notifications.length}</strong> uus teadete
-            </div>
-          )}
           <p>Mis toimub?</p>
           <div
             style={{
@@ -97,15 +91,32 @@ const UserScreen = ({ user, handleLogout }) => {
               >
                 Loe
               </Button>
-              {unreadCount > 0 && (
+              {notifications.length > 0 ? (
+                <div style={{ position: "absolute", top: "10px", right: "10px" }}>
+                  <div
+                    style={{
+                      background: "#fde68a",
+                      padding: "6px 8px",
+                      borderRadius: "6px",
+                      fontWeight: "bold",
+                      fontSize: "13px",
+                      pointerEvents: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                    }}
+                  >
+                    <strong>{notifications.length}</strong>
+                    <span style={{ whiteSpace: "nowrap" }}>{notifications.length === 1 ? "uus kiri" : "uut kirja"}</span>
+                  </div>
+                </div>
+              ) : unreadCount > 0 ? (
                 <div
                   style={{
                     position: "absolute",
                     top: "10px",
                     right: "10px",
-                    // backgroundColor: "#10b918ff",
                     color: "#10b918ff",
-                    //  borderRadius: "50%",
                     width: "40px",
                     height: "40px",
                     display: "flex",
@@ -118,7 +129,7 @@ const UserScreen = ({ user, handleLogout }) => {
                 >
                   +{unreadCount}
                 </div>
-              )}
+              ) : null}
             </div>
           </div>
           <Button
