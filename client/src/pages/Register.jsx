@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
+import Icon from "../components/Icon.jsx";
 import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -72,40 +73,38 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <div>
-        <Icon type="back" onClick={() => navigate("/main")} />
-      </div>
-      <form onSubmit={handleRegisterSubmit}>
-        <InputField
-          label="Kasutajanimi"
-          placeholder="Sisesta kasutajanimi"
-          value={username}
-          onChange={setUsername}
-        />
-        <InputField
-          label="Parool"
-          isPassword
-          placeholder="Sisesta parool"
-          value={password}
-          onChange={setPassword}
-        />
-        <InputField
-          label="Kinnita parool"
-          isPassword
-          placeholder="Kinnita parool"
-          value={confirmPassword}
-          onChange={setConfirmPassword}
-        />
+    <>
+    <Icon type="back" onClick={() => navigate("/")} />
+    <form onSubmit={handleRegisterSubmit}>
+      <InputField
+        label="Kasutajanimi"
+        placeholder="Sisesta kasutajanimi"
+        value={username}
+        onChange={setUsername}
+      />
+      <InputField
+        label="Parool"
+        isPassword
+        placeholder="Sisesta parool"
+        value={password}
+        onChange={setPassword}
+      />
+      <InputField
+        label="Kinnita parool"
+        isPassword
+        placeholder="Kinnita parool"
+        value={confirmPassword}
+        onChange={setConfirmPassword}
+      />
 
         {error && <p>{error}</p>}
         {message && <p>{message}</p>}
 
-        <Button type="submit" style={{ backgroundColor: "red" }} disabled={loading}>
-          Registreeru
-        </Button>
-      </form>
-    </div>
+      <Button type="submit" style={{ backgroundColor: "red" }} disabled={loading}>
+        Registreeru
+      </Button>
+    </form>
+    </>
   );
 };
 
