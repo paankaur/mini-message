@@ -1,10 +1,22 @@
 import EmailService from "../services/email.js";
+import { getIo } from "../util/socket.js";
 
 class EmailController {
   async create(req, res) {
     try {
       const { senderId, receiverId, message } = req.body;
       const email = await EmailService.createEmail(senderId, receiverId, message);
+      try {
+        const io = getIo();
+        io.to(`user_${receiverId}`).emit("new_email", {
+          id: email.id,
+          senderId: email.senderId,
+          receiverId: email.receiverId,
+          unread: email.unread,
+        });
+      } catch (e) {
+        // socket may not be initialized yet; ignore
+      }
       res.status(200).json({
         message: "Email sent successfully",
         email: { id: email.id, senderId: email.senderId, receiverId: email.receiverId, unread: email.unread },
