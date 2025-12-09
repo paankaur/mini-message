@@ -174,7 +174,7 @@ server/   # Express + Sequelize + Socket.IO backend
 ```
 
 ## Roles and Work Distribution
-- Paan and Aleksander had in a part in everything.
+- Paan and Aleksander had a part in everything.
 
 ## License
 ISC (see package.json)
