@@ -21,7 +21,6 @@ const CreateMessage = ({ user }) => {
     e.preventDefault();
     setStatusMessage("");
 
-    // Validation
     if (!receiverUsername || receiverUsername.trim().length === 0) {
       setStatusMessage("Palun sisesta saaja kasutajanimi.");
       return;
@@ -37,14 +36,12 @@ const CreateMessage = ({ user }) => {
 
     if (!user || !user.id) {
       setStatusMessage("Kasutaja ei ole sisse logitud.");
-      console.log("User not logged in:", user);
       return;
     }
 
     setLoading(true);
 
     try {
-      // First, look up the receiver by username
       const userLookupResponse = await fetch(`${USER_API_URL}${receiverUsername}`, {
         method: "GET",
         headers: {
@@ -61,9 +58,6 @@ const CreateMessage = ({ user }) => {
       const userData = await userLookupResponse.json();
       const receiverId = userData.user.id;
 
-      console.log("Sending email with senderId:", user.id, "receiverId:", receiverId);
-
-      // Now send the email with the resolved receiverId
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
@@ -77,15 +71,12 @@ const CreateMessage = ({ user }) => {
       });
 
       const data = await response.json();
-      console.log("Email response:", response.status, data);
 
       if (response.ok) {
         setStatusMessage(`Kiri saadetud kasutajale ${receiverUsername}`);
-        // Clear fields on success
         setReceiverUsername("");
         setMessage("");
       } else {
-        // Handle specific errors from server
         if (data.message && data.message.toLowerCase().includes("not found")) {
           setStatusMessage(`Kasutajat "${receiverUsername}" ei leitud.`);
         } else {

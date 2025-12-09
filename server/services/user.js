@@ -1,6 +1,5 @@
 import UserRepository from "../repositories/user.js";
 
-
 class UserService {
   async registerUser(name, password) {
     if (!name || name.length < 3) {
@@ -34,7 +33,7 @@ class UserService {
     if (!user) {
       throw new Error("User not found.");
     }
-    
+
     if (oldPassword) {
       const isOldPasswordValid = await user.isValidPassword(oldPassword);
       if (!isOldPasswordValid) {
@@ -52,7 +51,6 @@ class UserService {
   async getUserByName(name) {
     return UserRepository.findByName(name);
   }
-
 }
 
 export default new UserService();

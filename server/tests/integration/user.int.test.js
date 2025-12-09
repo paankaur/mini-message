@@ -32,10 +32,7 @@ describe("UserController Tests", () => {
       UserService.registerUser.mockResolvedValue(serviceReturnValue);
       await UserController.register(req, res);
 
-      expect(UserService.registerUser).toHaveBeenCalledWith(
-        requestBody.name,
-        requestBody.password
-      );
+      expect(UserService.registerUser).toHaveBeenCalledWith(requestBody.name, requestBody.password);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(successfulResponse);
     });
@@ -43,7 +40,7 @@ describe("UserController Tests", () => {
     test("should return 409 if user already exists (Conflict)", async () => {
       req.body = requestBody;
       const errorMessage = "User with this name already exists.";
-      
+
       UserService.registerUser.mockRejectedValue(new Error(errorMessage));
 
       await UserController.register(req, res);
@@ -69,18 +66,13 @@ describe("UserController Tests", () => {
     });
   });
 
-
-
   describe("login", () => {
     test("should log in user successfully and return 200", async () => {
       req.body = requestBody;
       UserService.loginUser.mockResolvedValue(serviceReturnValue);
       await UserController.login(req, res);
 
-      expect(UserService.loginUser).toHaveBeenCalledWith(
-        requestBody.name,
-        requestBody.password
-      );
+      expect(UserService.loginUser).toHaveBeenCalledWith(requestBody.name, requestBody.password);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: "Login successful",
@@ -91,7 +83,7 @@ describe("UserController Tests", () => {
     test("should return 401 for invalid credentials", async () => {
       req.body = requestBody;
 
-      UserService.loginUser.mockResolvedValue(null); 
+      UserService.loginUser.mockResolvedValue(null);
       await UserController.login(req, res);
 
       expect(res.status).toHaveBeenCalledWith(401);
@@ -114,8 +106,6 @@ describe("UserController Tests", () => {
     });
   });
 
-  
-
   describe("changePassword", () => {
     const changePasswordBody = {
       userId: 1,
@@ -126,7 +116,7 @@ describe("UserController Tests", () => {
     test("should change password successfully and return 200", async () => {
       req.body = changePasswordBody;
 
-      UserService.changePassword.mockResolvedValue(); 
+      UserService.changePassword.mockResolvedValue();
       await UserController.changePassword(req, res);
 
       expect(UserService.changePassword).toHaveBeenCalledWith(

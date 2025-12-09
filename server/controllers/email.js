@@ -14,12 +14,15 @@ class EmailController {
           receiverId: email.receiverId,
           unread: email.unread,
         });
-      } catch (e) {
-        // socket may not be initialized yet; ignore
-      }
+      } catch (e) {}
       res.status(200).json({
         message: "Email sent successfully",
-        email: { id: email.id, senderId: email.senderId, receiverId: email.receiverId, unread: email.unread },
+        email: {
+          id: email.id,
+          senderId: email.senderId,
+          receiverId: email.receiverId,
+          unread: email.unread,
+        },
       });
     } catch (error) {
       if (error.message.includes("not found")) {

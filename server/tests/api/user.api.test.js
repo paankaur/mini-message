@@ -56,11 +56,15 @@ describe("User API tests", () => {
     const reg = await request(app).post("/register").send({ name: "dave", password: "oldpass123" });
     const userId = reg.body.user.id;
 
-    const change = await request(app).put("/change-password").send({ userId, oldPassword: "oldpass123", newPassword: "newpass456" });
+    const change = await request(app)
+      .put("/change-password")
+      .send({ userId, oldPassword: "oldpass123", newPassword: "newpass456" });
     expect(change.status).toBe(200);
     expect(change.body).toHaveProperty("message", "Password changed successfully");
 
-    const loginNew = await request(app).post("/login").send({ name: "dave", password: "newpass456" });
+    const loginNew = await request(app)
+      .post("/login")
+      .send({ name: "dave", password: "newpass456" });
     expect(loginNew.status).toBe(200);
   });
 
@@ -68,11 +72,15 @@ describe("User API tests", () => {
     const reg = await request(app).post("/register").send({ name: "erin", password: "origpass" });
     const userId = reg.body.user.id;
 
-    const wrongOld = await request(app).put("/change-password").send({ userId, oldPassword: "badold", newPassword: "newpass" });
+    const wrongOld = await request(app)
+      .put("/change-password")
+      .send({ userId, oldPassword: "badold", newPassword: "newpass" });
 
     expect(wrongOld.status).toBe(400);
 
-    const missing = await request(app).put("/change-password").send({ userId: 99999, oldPassword: "whatever", newPassword: "newpass" });
+    const missing = await request(app)
+      .put("/change-password")
+      .send({ userId: 99999, oldPassword: "whatever", newPassword: "newpass" });
     expect(missing.status).toBe(404);
   });
 });

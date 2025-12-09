@@ -10,18 +10,18 @@ class EmailRepository {
   }
 
   async findByReceiverId(receiverId) {
-    return Email.findAll({ 
-      where: { receiverId }, 
+    return Email.findAll({
+      where: { receiverId },
       include: { association: "sender" },
-      order: [["createdAt", "DESC"]] 
+      order: [["createdAt", "DESC"]],
     });
   }
 
   async findBySenderId(senderId) {
-    return Email.findAll({ 
-      where: { senderId }, 
+    return Email.findAll({
+      where: { senderId },
       include: { association: "sender" },
-      order: [["createdAt", "DESC"]] 
+      order: [["createdAt", "DESC"]],
     });
   }
 

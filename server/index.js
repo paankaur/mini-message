@@ -21,7 +21,6 @@ sequelize
   })
   .then(() => {
     console.log("Models loaded");
-    //sync() with { force: true } to reset DB : sync({ force: true })
     return sequelize.sync();
   })
   .catch((error) => console.log("Unable to connect to DB", error));
@@ -36,7 +35,6 @@ app.use("/emails", emailRoutes);
 const server = http.createServer(app);
 
 initSocket(server).then(() => {
-  // listen on all interfaces so the server is reachable on the LAN
   server.listen(PORT, "0.0.0.0", () => {
     console.log(`Server listening on http://0.0.0.0:${PORT}`);
   });

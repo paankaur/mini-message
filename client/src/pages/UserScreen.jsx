@@ -11,7 +11,8 @@ const UserScreen = ({ user, handleLogout }) => {
 
   useEffect(() => {
     if (!user) return;
-    const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_API_URL || "http://localhost:3000";
+    const SOCKET_URL =
+      import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_API_URL || "http://localhost:3000";
     const socket = connectSocket(SOCKET_URL, user.id);
     const handler = (payload) => {
       setNotifications((n) => [payload, ...n]);
@@ -56,11 +57,8 @@ const UserScreen = ({ user, handleLogout }) => {
   return (
     <div>
       {user ? (
-        // Authenticated View (UserScreen Logic)
-
         <>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          
             <Icon type="settings" onClick={() => navigate("/settings")} />
           </div>
 
@@ -75,8 +73,12 @@ const UserScreen = ({ user, handleLogout }) => {
             }}
           >
             <Button
-              style={{ height: "180px", width: "180px",backgroundColor: '#3f5040ff',
-                  color: 'white', }}
+              style={{
+                height: "180px",
+                width: "180px",
+                backgroundColor: "#3f5040ff",
+                color: "white",
+              }}
               onClick={() => navigate("/create-message")}
             >
               Kirjuta
@@ -84,8 +86,8 @@ const UserScreen = ({ user, handleLogout }) => {
             <div style={{ position: "relative" }}>
               <Button
                 style={{
-                  backgroundColor: notifications.length > 0 ? '#55b45cff' : '#3f5040ff',
-                  color: 'white',
+                  backgroundColor: notifications.length > 0 ? "#55b45cff" : "#3f5040ff",
+                  color: "white",
                   height: "180px",
                   width: "180px",
                   ...(hasUnreadMessages && { border: "2px solid #10b918ff" }),
@@ -111,7 +113,9 @@ const UserScreen = ({ user, handleLogout }) => {
                     }}
                   >
                     <strong>{notifications.length}</strong>
-                    <span style={{ whiteSpace: "nowrap" }}>{notifications.length === 1 ? "uus kiri" : "uut kirja"}</span>
+                    <span style={{ whiteSpace: "nowrap" }}>
+                      {notifications.length === 1 ? "uus kiri" : "uut kirja"}
+                    </span>
                   </div>
                 </div>
               ) : unreadCount > 0 ? (
@@ -136,22 +140,15 @@ const UserScreen = ({ user, handleLogout }) => {
               ) : null}
             </div>
           </div>
-          <Button
-            onClick={handleLogout}
-            style={{ backgroundColor: "#ef4444" }}
-            type="button"
-          >
+          <Button onClick={handleLogout} style={{ backgroundColor: "#ef4444" }} type="button">
             Logi välja
           </Button>
         </>
       ) : (
-        // Unauthenticated View
         <>
           <h2>Avaleht</h2>
           <p>Palun logi sisse või registreeru, et jätkata.</p>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-          >
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             <Link to="/">Logi sisse</Link>
             <Link to="/register">Registreeru</Link>
           </div>

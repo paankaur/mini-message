@@ -44,7 +44,6 @@ const ReadMessage = ({ user }) => {
   }, [user]);
 
   const expandEmail = async (email) => {
-    // If already expanded, do nothing (prevents collapse via container click)
     if (expandedIds.has(email.id)) return;
 
     setExpandedIds((prev) => {
@@ -53,7 +52,6 @@ const ReadMessage = ({ user }) => {
       return newSet;
     });
 
-    // Mark as read if unread
     if (email.unread) {
       try {
         await fetch(`${API_BASE_URL}${email.id}/read`, {
@@ -64,10 +62,7 @@ const ReadMessage = ({ user }) => {
           body: JSON.stringify({ userId: user.id }),
         });
 
-        // Update local state
-        setEmails((prev) =>
-          prev.map((e) => (e.id === email.id ? { ...e, unread: false } : e))
-        );
+        setEmails((prev) => prev.map((e) => (e.id === email.id ? { ...e, unread: false } : e)));
       } catch (err) {
         console.error("Error marking as read:", err);
       }
@@ -97,7 +92,7 @@ const ReadMessage = ({ user }) => {
       }
 
       setDeletedIds((prev) => new Set(prev).add(emailId));
-      // After showing "kustutatud" message, remove from list
+
       setTimeout(() => {
         setEmails((prev) => prev.filter((email) => email.id !== emailId));
         setDeletedIds((prev) => {
@@ -121,13 +116,11 @@ const ReadMessage = ({ user }) => {
 
   return (
     <div style={{ padding: "20px" }}>
-        <div style={{ marginRight: "auto", width: "fit-content" }}>
-            <Icon type="back" onClick={() => navigate("/main")} />
-        </div>
-      
-      <h2 style={{ textAlign: "center" }}>
-        {user.name || user.username} kirjakast..
-      </h2>
+      <div style={{ marginRight: "auto", width: "fit-content" }}>
+        <Icon type="back" onClick={() => navigate("/main")} />
+      </div>
+
+      <h2 style={{ textAlign: "center" }}>{user.name || user.username} kirjakast..</h2>
 
       {loading && <p>Laadin kirju...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -147,13 +140,8 @@ const ReadMessage = ({ user }) => {
 
             if (isDeleted) {
               return (
-                <div
-                  key={email.id}
-                  style={{ padding: "10px", marginBottom: "10px" }}
-                >
-                  <p style={{ color: "gray", fontStyle: "italic" }}>
-                    Sõnum kustutatud
-                  </p>
+                <div key={email.id} style={{ padding: "10px", marginBottom: "10px" }}>
+                  <p style={{ color: "gray", fontStyle: "italic" }}>Sõnum kustutatud</p>
                 </div>
               );
             }
@@ -170,7 +158,6 @@ const ReadMessage = ({ user }) => {
                   backgroundColor: email.unread ? "#b34f4fff" : "#24ad52ff",
                 }}
               >
-                {/* Collapsed view */}
                 <div
                   style={{
                     display: "flex",
@@ -195,11 +182,7 @@ const ReadMessage = ({ user }) => {
                           size={20}
                           style={{ marginRight: "10px" }}
                         />
-                        <span
-                          style={{ color: "#10b918ff", fontWeight: "bold" }}
-                        >
-                          Lugemata
-                        </span>
+                        <span style={{ color: "#10b918ff", fontWeight: "bold" }}>Lugemata</span>
                       </>
                     )}
                   </div>
@@ -214,7 +197,6 @@ const ReadMessage = ({ user }) => {
                   </div>
                 </div>
 
-                {/* Expanded view */}
                 {isExpanded && (
                   <div
                     style={{
@@ -235,7 +217,7 @@ const ReadMessage = ({ user }) => {
 
                     <div style={{ display: "flex", gap: "10px" }}>
                       <Button
-                      style={{ backgroundColor: "#3f5040ff", color: "white" }}
+                        style={{ backgroundColor: "#3f5040ff", color: "white" }}
                         onClick={(e) => {
                           e.stopPropagation();
                           collapseEmail(email.id);

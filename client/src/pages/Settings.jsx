@@ -86,11 +86,12 @@ const Settings = ({ user }) => {
               value={confirmPassword}
               onChange={setConfirmPassword}
             />
-            <Button onClick={handleSave} style={{ backgroundColor: "#ef4444" }}>Salvesta</Button>
+            <Button onClick={handleSave} style={{ backgroundColor: "#ef4444" }}>
+              Salvesta
+            </Button>
           </div>
         </>
       ) : (
-        // Unauthenticated View
         <p>Palun logi sisse, et näha seadeid.</p>
       )}
     </div>

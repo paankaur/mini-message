@@ -1,0 +1,66 @@
+<svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="500" y="30" font-size="28" font-weight="bold" text-anchor="middle" fill="#333">
+    Mini Message ER Diagram
+  </text>
+
+  <!-- Users Table -->
+  <rect x="50" y="100" width="280" height="200" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" rx="4"/>
+  <rect x="50" y="100" width="280" height="40" fill="#1976d2" stroke="#1976d2" stroke-width="2" rx="4"/>
+  <text x="190" y="130" font-size="18" font-weight="bold" text-anchor="middle" fill="white">
+    users
+  </text>
+
+  <!-- Users columns -->
+  <text x="70" y="165" font-size="14" font-family="monospace" fill="#333">
+    <tspan x="70" dy="0">id (PK)</tspan>
+    <tspan x="70" dy="25">name (VARCHAR)</tspan>
+    <tspan x="70" dy="25">password (VARCHAR)</tspan>
+    <tspan x="70" dy="25">createdAt (TIMESTAMP)</tspan>
+    <tspan x="70" dy="25">updatedAt (TIMESTAMP)</tspan>
+  </text>
+
+  <!-- Emails Table -->
+  <rect x="620" y="100" width="330" height="240" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2" rx="4"/>
+  <rect x="620" y="100" width="330" height="40" fill="#7b1fa2" stroke="#7b1fa2" stroke-width="2" rx="4"/>
+  <text x="785" y="130" font-size="18" font-weight="bold" text-anchor="middle" fill="white">
+    emails
+  </text>
+
+  <!-- Emails columns -->
+  <text x="640" y="165" font-size="14" font-family="monospace" fill="#333">
+    <tspan x="640" dy="0">id (PK)</tspan>
+    <tspan x="640" dy="25">senderId (FK)</tspan>
+    <tspan x="640" dy="25">receiverId (FK)</tspan>
+    <tspan x="640" dy="25">message (VARCHAR 900)</tspan>
+    <tspan x="640" dy="25">unread (BOOLEAN)</tspan>
+    <tspan x="640" dy="25">createdAt (TIMESTAMP)</tspan>
+    <tspan x="640" dy="25">updatedAt (TIMESTAMP)</tspan>
+  </text>
+
+  <!-- Relationship lines -->
+  <!-- Line from users.id to emails.senderId -->
+  <line x1="330" y1="200" x2="620" y2="210" stroke="#e91e63" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="470" y="195" font-size="12" fill="#e91e63" font-weight="bold">
+    1..* (sender)
+  </text>
+
+  <!-- Line from users.id to emails.receiverId -->
+  <line x1="330" y1="250" x2="620" y2="260" stroke="#2196f3" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="470" y="280" font-size="12" fill="#2196f3" font-weight="bold">
+    1..* (receiver)
+  </text>
+
+  <!-- Legend -->
+  <rect x="50" y="380" width="900" height="180" fill="#fafafa" stroke="#999" stroke-width="1" rx="4"/>
+  <text x="70" y="410" font-size="16" font-weight="bold" fill="#333">
+    Legend:
+  </text>
+
+  <text x="70" y="450" font-size="13" fill="#333">
+    <tspan x="70" dy="0">PK = Primary Key (unique identifier for each row)</tspan>
+    <tspan x="70" dy="25">FK = Foreign Key (reference to another table)</tspan>
+    <tspan x="70" dy="25">1..* = One-to-Many relationship (one User can have many Emails as sender or receiver)</tspan>
+    <tspan x="70" dy="25">unread = Boolean flag indicating if Email has been read (true = unread, false = read)</tspan>
+  </text>
+</svg>

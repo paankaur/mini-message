@@ -54,7 +54,6 @@ class EmailService {
     if (!email) {
       throw new Error("Email not found.");
     }
-    // Only receiver can delete
     if (email.receiverId !== userId) {
       throw new Error("Not authorized.");
     }

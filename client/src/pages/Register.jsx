@@ -74,36 +74,36 @@ const Register = () => {
 
   return (
     <>
-    <Icon type="back" onClick={() => navigate("/")} />
-    <form onSubmit={handleRegisterSubmit}>
-      <InputField
-        label="Kasutajanimi"
-        placeholder="Sisesta kasutajanimi"
-        value={username}
-        onChange={setUsername}
-      />
-      <InputField
-        label="Parool"
-        isPassword
-        placeholder="Sisesta parool"
-        value={password}
-        onChange={setPassword}
-      />
-      <InputField
-        label="Kinnita parool"
-        isPassword
-        placeholder="Kinnita parool"
-        value={confirmPassword}
-        onChange={setConfirmPassword}
-      />
+      <Icon type="back" onClick={() => navigate("/")} />
+      <form onSubmit={handleRegisterSubmit}>
+        <InputField
+          label="Kasutajanimi"
+          placeholder="Sisesta kasutajanimi"
+          value={username}
+          onChange={setUsername}
+        />
+        <InputField
+          label="Parool"
+          isPassword
+          placeholder="Sisesta parool"
+          value={password}
+          onChange={setPassword}
+        />
+        <InputField
+          label="Kinnita parool"
+          isPassword
+          placeholder="Kinnita parool"
+          value={confirmPassword}
+          onChange={setConfirmPassword}
+        />
 
         {error && <p>{error}</p>}
         {message && <p>{message}</p>}
 
-      <Button type="submit" style={{ backgroundColor: "red" }} disabled={loading}>
-        Registreeru
-      </Button>
-    </form>
+        <Button type="submit" style={{ backgroundColor: "red" }} disabled={loading}>
+          Registreeru
+        </Button>
+      </form>
     </>
   );
 };
