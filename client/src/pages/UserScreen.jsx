@@ -11,7 +11,7 @@ const UserScreen = ({ user, handleLogout }) => {
 
   useEffect(() => {
     if (!user) return;
-    const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_API_URL || window.location.origin;
+    const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_API_URL || "http://localhost:3000";
     const socket = connectSocket(SOCKET_URL, user.id);
     const handler = (payload) => {
       setNotifications((n) => [payload, ...n]);
