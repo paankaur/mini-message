@@ -86,7 +86,7 @@ const Settings = ({ user }) => {
               value={confirmPassword}
               onChange={setConfirmPassword}
             />
-            <Button onClick={handleSave}>Salvesta</Button>
+            <Button onClick={handleSave} style={{ backgroundColor: "#ef4444" }}>Salvesta</Button>
           </div>
         </>
       ) : (

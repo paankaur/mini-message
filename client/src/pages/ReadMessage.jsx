@@ -167,7 +167,7 @@ const ReadMessage = ({ user }) => {
                   padding: "15px",
                   marginBottom: "10px",
                   borderRadius: "5px",
-                  backgroundColor: email.unread ? "#1a1a1a" : "#3f3f3f",
+                  backgroundColor: email.unread ? "#b34f4fff" : "#24ad52ff",
                 }}
               >
                 {/* Collapsed view */}
@@ -176,6 +176,7 @@ const ReadMessage = ({ user }) => {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
+                    cursor: "pointer",
                   }}
                 >
                   <div style={{ flex: 1 }}>
@@ -205,7 +206,7 @@ const ReadMessage = ({ user }) => {
                   <div
                     style={{
                       textAlign: "right",
-                      color: "#666",
+                      color: "#000000ff",
                       fontSize: "0.9em",
                     }}
                   >
@@ -234,6 +235,7 @@ const ReadMessage = ({ user }) => {
 
                     <div style={{ display: "flex", gap: "10px" }}>
                       <Button
+                      style={{ backgroundColor: "#3f5040ff", color: "white" }}
                         onClick={(e) => {
                           e.stopPropagation();
                           collapseEmail(email.id);

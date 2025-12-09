@@ -122,7 +122,7 @@ const CreateMessage = ({ user }) => {
 
       <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-end", gap: "10px" }}>
         <SendMessage value={message} onChange={setMessage} />
-        <Button onClick={handleSend} disabled={loading}>
+        <Button onClick={handleSend} disabled={loading} style={{ backgroundColor: "#ef4444" }}>
           {loading ? "Saadan..." : "Saada"}
         </Button>
       </div>

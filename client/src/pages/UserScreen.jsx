@@ -75,7 +75,8 @@ const UserScreen = ({ user, handleLogout }) => {
             }}
           >
             <Button
-              style={{ height: "600px", width: "180px" }}
+              style={{ height: "180px", width: "180px",backgroundColor: '#3f5040ff',
+                  color: 'white', }}
               onClick={() => navigate("/create-message")}
             >
               Kirjuta
@@ -83,7 +84,9 @@ const UserScreen = ({ user, handleLogout }) => {
             <div style={{ position: "relative" }}>
               <Button
                 style={{
-                  height: "600px",
+                  backgroundColor: notifications.length > 0 ? '#55b45cff' : '#3f5040ff',
+                  color: 'white',
+                  height: "180px",
                   width: "180px",
                   ...(hasUnreadMessages && { border: "2px solid #10b918ff" }),
                 }}
@@ -95,9 +98,10 @@ const UserScreen = ({ user, handleLogout }) => {
                 <div style={{ position: "absolute", top: "10px", right: "10px" }}>
                   <div
                     style={{
-                      background: "#fde68a",
+                      color: "#cbda4bff",
                       padding: "6px 8px",
                       borderRadius: "6px",
+                      border: "2px solid #cbda4bff",
                       fontWeight: "bold",
                       fontSize: "13px",
                       pointerEvents: "none",
