@@ -16,7 +16,7 @@ Mini Message is a full-stack mini-messaging application where users can register
 - Register, login, change password
 - Send, read, and delete messages ("emails")
 - Socket.IO notifications on new incoming email
-- LAN-friendly: API listens on 0.0.0.0; Vite host mode for testing from phone
+- LAN-friendly: API listens on 0.0.0.0; Vite host mode for testing in local network
 
 ## Tech Stack
 - Backend: Node.js, Express 5, Sequelize, MySQL (SQLite in tests), Socket.IO
@@ -49,7 +49,7 @@ $env:DB_PASS='qwerty'
 $env:DB_HOST='localhost'
 
 # Socket.IO allowed origins (comma-separated). Use '*' for dev, restrict in prod.
-$env:ALLOWED_ORIGINS='http://localhost:5173,http://<lan-ip>:5173'
+$env:ALLOWED_ORIGINS='http://localhost:5173,http://1.1.1.1:5173'
 
 # Jest/test mode uses NODE_ENV=test and sqlite in-memory
 $env:NODE_ENV='development'
@@ -174,7 +174,7 @@ server/   # Express + Sequelize + Socket.IO backend
 ```
 
 ## Roles and Work Distribution
-- Add team members and responsibility areas (e.g., backend, frontend, testing) here. _Customize based on your team._
+- Paan and Aleksander had in a part in everything.
 
 ## License
 ISC (see package.json)
