@@ -119,8 +119,9 @@ describe("UserService.changePassword", () => {
   test("should throw error if user is not found", async () => {
     UserRepository.findById.mockResolvedValue(null);
 
-    await expect(UserService.changePassword(userId, oldPassword, newPassword))
-      .rejects.toThrow("User not found.");
+    await expect(UserService.changePassword(userId, oldPassword, newPassword)).rejects.toThrow(
+      "User not found."
+    );
   });
 
   test("should throw error if old password is incorrect", async () => {
@@ -130,8 +131,9 @@ describe("UserService.changePassword", () => {
     };
     UserRepository.findById.mockResolvedValue(mockUser);
 
-    await expect(UserService.changePassword(userId, oldPassword, newPassword))
-      .rejects.toThrow("Old password is incorrect.");
+    await expect(UserService.changePassword(userId, oldPassword, newPassword)).rejects.toThrow(
+      "Old password is incorrect."
+    );
   });
 
   test("should throw error if new password is too short", async () => {
@@ -141,8 +143,9 @@ describe("UserService.changePassword", () => {
     };
     UserRepository.findById.mockResolvedValue(mockUser);
 
-    await expect(UserService.changePassword(userId, oldPassword, "123"))
-      .rejects.toThrow("New password must be at least 6 characters long.");
+    await expect(UserService.changePassword(userId, oldPassword, "123")).rejects.toThrow(
+      "New password must be at least 6 characters long."
+    );
   });
 
   test("should update password and save user successfully", async () => {

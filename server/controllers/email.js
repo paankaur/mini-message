@@ -1,13 +1,28 @@
 import EmailService from "../services/email.js";
+import { getIo } from "../util/socket.js";
 
 class EmailController {
   async create(req, res) {
     try {
       const { senderId, receiverId, message } = req.body;
       const email = await EmailService.createEmail(senderId, receiverId, message);
+      try {
+        const io = getIo();
+        io.to(`user_${receiverId}`).emit("new_email", {
+          id: email.id,
+          senderId: email.senderId,
+          receiverId: email.receiverId,
+          unread: email.unread,
+        });
+      } catch (e) {}
       res.status(200).json({
         message: "Email sent successfully",
-        email: { id: email.id, senderId: email.senderId, receiverId: email.receiverId, unread: email.unread },
+        email: {
+          id: email.id,
+          senderId: email.senderId,
+          receiverId: email.receiverId,
+          unread: email.unread,
+        },
       });
     } catch (error) {
       if (error.message.includes("not found")) {
@@ -64,6 +79,23 @@ class EmailController {
       res.status(200).json({ email });
     } catch (error) {
       res.status(500).json({ message: "Failed to load email", error: error.message });
+    }
+  }
+
+  async deleteEmail(req, res) {
+    try {
+      const { id } = req.params;
+      const { userId } = req.body;
+      await EmailService.deleteEmail(Number(id), userId);
+      res.status(200).json({ message: "Email deleted" });
+    } catch (error) {
+      if (error.message === "Email not found.") {
+        return res.status(404).json({ message: error.message });
+      }
+      if (error.message === "Not authorized.") {
+        return res.status(403).json({ message: error.message });
+      }
+      res.status(400).json({ message: "Failed to delete email", error: error.message });
     }
   }
 }

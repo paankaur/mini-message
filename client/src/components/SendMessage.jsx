@@ -4,8 +4,6 @@ const SendMessage = ({ value, onChange }) => {
   return (
     <div
       style={{
-        // borderRadius: "10px",
-        // border: "1px solid grey",
         padding: "10px",
         width: "auto",
         maxWidth: "600px",
@@ -13,8 +11,6 @@ const SendMessage = ({ value, onChange }) => {
     >
       <div
         style={{
-          // borderRadius: "10px",
-          // border: "1px solid grey",
           padding: "10px",
           display: "flex",
           alignItems: "flex-start",
@@ -47,11 +43,11 @@ const SendMessage = ({ value, onChange }) => {
             marginTop: "5px",
             borderRadius: "5px",
             border: "1px solid grey",
-            resize: "none", // prevents user from resizing the box
-            overflowY: "auto", // vertical scroll if text exceeds height
-            overflowX: "hidden", // no horizontal scroll
-            whiteSpace: "pre-wrap", // wrap long lines normally (at spaces)
-            wordWrap: "break-word", // prevents long words from overflowing
+            resize: "none",
+            overflowY: "auto",
+            overflowX: "hidden",
+            whiteSpace: "pre-wrap",
+            wordWrap: "break-word",
           }}
         />
       </div>

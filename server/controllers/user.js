@@ -38,10 +38,23 @@ class UserController {
       await UserService.changePassword(userId, oldPassword, newPassword);
       res.status(200).json({ message: "Password changed successfully" });
     } catch (error) {
-      if (error.message === "User not found." || error.message === "Old password is incorrect.") {
+      if (error.message === "User not found.") {
         return res.status(404).json({ message: error.message });
       }
-      res.status(400).json({ message: "Password change failed", error: error.message });
+      res.status(400).json({ message: error.message || "Password change failed" });
+    }
+  }
+
+  async getUserByName(req, res) {
+    try {
+      const { name } = req.params;
+      const user = await UserService.getUserByName(name);
+      if (!user) {
+        return res.status(404).json({ message: "User not found." });
+      }
+      res.status(200).json({ user: { id: user.id, name: user.name } });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to get user", error: error.message });
     }
   }
 }

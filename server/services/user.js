@@ -1,6 +1,5 @@
 import UserRepository from "../repositories/user.js";
 
-
 class UserService {
   async registerUser(name, password) {
     if (!name || name.length < 3) {
@@ -34,10 +33,14 @@ class UserService {
     if (!user) {
       throw new Error("User not found.");
     }
-    const isOldPasswordValid = await user.isValidPassword(oldPassword);
-    if (!isOldPasswordValid) {
-      throw new Error("Old password is incorrect.");
+
+    if (oldPassword) {
+      const isOldPasswordValid = await user.isValidPassword(oldPassword);
+      if (!isOldPasswordValid) {
+        throw new Error("Old password is incorrect.");
+      }
     }
+
     if (!newPassword || newPassword.length < 6) {
       throw new Error("New password must be at least 6 characters long.");
     }
@@ -45,6 +48,9 @@ class UserService {
     return user.save();
   }
 
+  async getUserByName(name) {
+    return UserRepository.findByName(name);
+  }
 }
 
 export default new UserService();

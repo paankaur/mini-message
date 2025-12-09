@@ -43,10 +43,10 @@ User.prototype.isValidPassword = function (password) {
 };
 
 User.associate = (models) => {
-    if (models.Email) {
-        User.hasMany(models.Email, { foreignKey: 'senderId', as: 'sentEmails' });
-        User.hasMany(models.Email, { foreignKey: 'receiverId', as: 'receivedEmails' });
-    }
+  if (models.Email) {
+    User.hasMany(models.Email, { foreignKey: "senderId", as: "sentEmails" });
+    User.hasMany(models.Email, { foreignKey: "receiverId", as: "receivedEmails" });
+  }
 };
 
 export default User;

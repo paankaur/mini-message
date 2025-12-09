@@ -6,15 +6,23 @@ class EmailRepository {
   }
 
   async findById(id) {
-    return Email.findByPk(id);
+    return Email.findByPk(id, { include: { association: "sender" } });
   }
 
   async findByReceiverId(receiverId) {
-    return Email.findAll({ where: { receiverId }, order: [["createdAt", "DESC"]] });
+    return Email.findAll({
+      where: { receiverId },
+      include: { association: "sender" },
+      order: [["createdAt", "DESC"]],
+    });
   }
 
   async findBySenderId(senderId) {
-    return Email.findAll({ where: { senderId }, order: [["createdAt", "DESC"]] });
+    return Email.findAll({
+      where: { senderId },
+      include: { association: "sender" },
+      order: [["createdAt", "DESC"]],
+    });
   }
 
   async markAsRead(id) {
@@ -22,6 +30,10 @@ class EmailRepository {
     if (!email) return null;
     email.unread = false;
     return email.save();
+  }
+
+  async deleteEmail(id) {
+    return Email.destroy({ where: { id } });
   }
 }
 

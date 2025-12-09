@@ -3,7 +3,7 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 const Login = ({ setUser }) => {
   const navigate = useNavigate();
@@ -32,14 +32,17 @@ const Login = ({ setUser }) => {
       const data = await response.json();
 
       if (response.ok) {
+        const serverUser = data.user || {};
         const userData = {
-          username: data.username || username,
+          id: serverUser.id,
+          name: serverUser.name || username,
+          username: serverUser.name || username,
           token: data.token || "mock_auth_token",
         };
         setUser(userData);
         navigate("/main");
       } else {
-        setError( "Sisselogimine ebaõnnestus");
+        setError("Sisselogimine ebaõnnestus");
       }
     } catch (error) {
       setError("Sisselogimine ebaõnnestus");

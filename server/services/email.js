@@ -48,6 +48,17 @@ class EmailService {
   async getEmail(emailId) {
     return EmailRepository.findById(emailId);
   }
+
+  async deleteEmail(emailId, userId) {
+    const email = await EmailRepository.findById(emailId);
+    if (!email) {
+      throw new Error("Email not found.");
+    }
+    if (email.receiverId !== userId) {
+      throw new Error("Not authorized.");
+    }
+    return EmailRepository.deleteEmail(emailId);
+  }
 }
 
 export default new EmailService();
