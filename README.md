@@ -174,7 +174,8 @@ server/   # Express + Sequelize + Socket.IO backend
 ```
 
 ## Roles and Work Distribution
-- Paan and Aleksander had a part in everything.
+- Paan handled e-mails side (front- and back-end)
+- Aleksander handled user side (front-, back-end, tests, Socket)
 
 ## License
 ISC (see package.json)
